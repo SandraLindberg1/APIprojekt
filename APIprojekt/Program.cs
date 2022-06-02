@@ -19,7 +19,7 @@ namespace APIprojekt
             {
                 var provider = scope.ServiceProvider;
 
-                //PokeDbContext.Reset(provider).Wait();
+                PokeDbContext.Reset(provider).Wait();
             }
 
             host.Run();

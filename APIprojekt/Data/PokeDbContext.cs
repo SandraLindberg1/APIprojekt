@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using APIprojekt.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    public class PokeDbContext : DbContext
-    {
+public class PokeDbContext : IdentityDbContext<IdentityUser>
+{
         public PokeDbContext (DbContextOptions<PokeDbContext> options)
             : base(options)
         {
@@ -44,6 +45,6 @@ using Microsoft.Extensions.DependencyInjection;
         {
             UserName = "TestUser"
         },
-        "TestUser");
+        "TestUser?3");
     }
 }

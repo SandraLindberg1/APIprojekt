@@ -57,16 +57,18 @@ namespace APIprojekt
                     }
                 });
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIprojekt", Version = "v1" });
+                c.EnableAnnotations();
             });
 
             services.AddDbContext<PokeDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PokeDbContext")));
 
-            //services.AddIdentityCore<IdentityUser>()
-                //.AddEntityFrameworkStores<PokeDbContext>();
 
-            //services.AddAuthentication("BasicAuthentication")
-                //.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            services.AddIdentityCore<IdentityUser>()
+                .AddEntityFrameworkStores<PokeDbContext>();
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +85,7 @@ namespace APIprojekt
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
